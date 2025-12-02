@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yodacal - About Our Team</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="homepage.html" class="logo-container">
+            <img src="logo.png" alt="yodacal Logo" class="logo">
+            yodacal
+        </a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="homepage.html" ">Home</a></li>
+            <li><a href="caloriecalculator.html">Calorie Calculator</a></li>
+            <li><a href="dietplan.html">Diet Plan</a></li>
+            <li><a href="successstories.html">Success Stories</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="aboutuspage.html">About Us</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <main>
+        <section class="about-section">
+            <header>
+                <h1>Meet the Experts</h1>
+                <p>
+                    We are a dedicated team of certified nutritionists, dietitians, and fitness enthusiasts committed to revolutionizing your health journey through personalized guidance.
+                </p>
+            </header>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <div>
+                        <h3>M. Farooq Hanif</h3>
+                        <span class="role">Manager</span>
+                        <p class="description">I'm tall.</p>
+                        <div class="contact-details">
+                            <div><span>Phone:</span> +923277490959</div>
+                            <div><span>Email:</span> f250032@cfd.nu.edu.pk</div>
+                            <div><span>Instagram:</span> <a href="#">@farooqhanif01</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div>
+                        <h3>Maila Mirza</h3>
+                        <span class="role">Nutritionist</span>
+                        <p class="description">I'm short.</p>
+                        <div class="contact-details">
+                            <div><span>Phone:</span> +921234567894</div>
+                            <div><span>Email:</span> f250015@cfd.nu.edu.pk</div>
+                            <div><span>Instagram:</span> <a href="#">@yodacal</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div>
+                        <h3>Momna Amir</h3>
+                        <span class="role">Holistic Wellness Coach</span>
+                        <p class="description">I like to wear heels.</p>
+                        <div class="contact-details">
+                            <div><span>Phone:</span> +921237567894</div>
+                            <div><span>Email:</span> f250081@cfd.nu.edu.pk</div>
+                            <div><span>Instagram:</span> <a href="#">@yodacal</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div>
+                        <h3>Daniyal A. Saif</h3>
+                        <span class="role">Senior Fitness Coach</span>
+                        <p class="description">I'm tall and unfunny.</p>
+                        <div class="contact-details">
+                            <div><span>Phone:</span> +923166632955</div>
+                            <div><span>Email:</span> f250070@cfd.nu.edu.pk</div>
+                            <div><span>Instagram:</span> <a href="#">@danylsaif</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div>
+                        <h3>Abdullah</h3>
+                        <span class="role">Customer Success Manager</span>
+                        <p class="description">22 batch.</p>
+                        <div class="contact-details">
+                            <div><span>Phone:</span> +923258953684</div>
+                            <div><span>Email:</span> abdullah.w@yodacal.com</div>
+                            <div><span>Instagram:</span> <a href="#">@yodacal</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GOOGLE MAPS – EMPIRE STATE BUILDING -->
+        <section class="map-section">
+            <div class="map-container">
+                <h2>Our Global Headquarters</h2>
+                <p>Visit us at the iconic Empire State Building.</p>
+                <div class="map-wrapper">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.184643425362!2d-73.987854684593!3d40.7484409793274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b311f7b9%3A0xd1340f7d0b2a8b8c!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1715000000000!5m2!1sen!2sus"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 yodacal. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('hamburger').addEventListener('click', () => {
+        document.getElementById('nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,529 @@
+﻿    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>yodacal - Diet Plans</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --bg-color: #f5ede2;
+                --green-light: #8fc07a;
+                --green-dark: #4a7c59;
+                --brown-dark: #382a25;
+                --text-color: #382a25;
+                --white: #ffffff;
+                --primary-color: var(--green-light);
+                --card-bg: #ffffff;
+                --border-radius: 16px;
+                --shadow: 0 8px 24px rgba(0,0,0,0.08);
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Inter',sans-serif;
+            }
+
+            body {
+                background: var(--bg-color);
+                color: var(--text-color);
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            main {
+                flex-grow: 1;
+                padding: 2rem 1rem;
+            }
+
+            .container {
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            /* Navbar */
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 5%;
+                background: var(--brown-dark);
+                color: var(--white);
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .logo-container {
+                font-size: 1.3rem;
+                font-weight: 800;
+                color: var(--green-light);
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                text-decoration: none;
+            }
+
+                .logo-container .logo {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+            .nav-links {
+                list-style: none;
+                display: flex;
+                gap: 25px;
+            }
+
+                .nav-links a {
+                    color: white;
+                    text-decoration: none;
+                    font-weight: 600;
+                    transition: color .3s;
+                }
+
+                    .nav-links a:hover, .nav-links a.active {
+                        color: var(--primary-color);
+                    }
+
+            .hamburger {
+                display: none;
+                cursor: pointer;
+            }
+
+                .hamburger span {
+                    display: block;
+                    width: 28px;
+                    height: 3px;
+                    background: white;
+                    margin: 5px 0;
+                    border-radius: 3px;
+                }
+
+            .page-header {
+                text-align: center;
+                margin: 3rem 0 2rem;
+            }
+
+                .page-header h1 {
+                    font-size: 3rem;
+                    color: var(--green-dark);
+                    font-weight: 800;
+                    margin-bottom: 0.5rem;
+                }
+
+                .page-header p {
+                    font-size: 1.2rem;
+                    color: #555;
+                    max-width: 700px;
+                    margin: 0 auto;
+                }
+
+            /* Dropdown */
+            .diet-selector {
+                display: flex;
+                justify-content: center;
+                margin: 2rem 0 3rem;
+            }
+
+            .custom-select {
+                position: relative;
+                width: 420px;
+                max-width: 100%;
+            }
+
+            select.styled {
+                width: 100%;
+                padding: 16px 50px 16px 24px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: var(--brown-dark);
+                background: white;
+                border: 2px solid #ddd;
+                border-radius: 50px;
+                box-shadow: var(--shadow);
+                appearance: none;
+                cursor: pointer;
+                transition: all .3s;
+            }
+
+                select.styled:hover {
+                    border-color: var(--green-light);
+                }
+
+                select.styled:focus {
+                    outline: none;
+                    border-color: var(--green-dark);
+                    box-shadow: 0 0 0 4px rgba(79,124,89,0.15);
+                }
+
+            .custom-select::after {
+                content: "ll";
+                position: absolute;
+                top: 50%;
+                right: 20px;
+                transform: translateY(-50%);
+                font-size: 1.4rem;
+                color: var(--green-dark);
+                pointer-events: none;
+            }
+
+            .premium-badge {
+                position: absolute;
+                top: -10px;
+                right: 10px;
+                background: #ffd700;
+                color: #b8860b;
+                font-size: 0.7rem;
+                padding: 4px 10px;
+                border-radius: 20px;
+                font-weight: bold;
+                z-index: 5;
+            }
+
+            /* Nutrition Table */
+            .nutrition-table-wrapper {
+                margin: 3rem 0;
+                text-align: center;
+            }
+
+                .nutrition-table-wrapper h2 {
+                    color: var(--green-dark);
+                    font-size: 2.2rem;
+                    margin-bottom: 1.5rem;
+                }
+
+            .nutrition-table {
+                width: 100%;
+                max-width: 800px;
+                margin: 0 auto;
+                border-collapse: collapse;
+                background: white;
+                border-radius: var(--border-radius);
+                overflow: hidden;
+                box-shadow: var(--shadow);
+            }
+
+                .nutrition-table th {
+                    background: var(--green-dark);
+                    color: white;
+                    padding: 1.2rem;
+                    font-weight: 700;
+                }
+
+                .nutrition-table td {
+                    padding: 1rem;
+                    text-align: center;
+                    border-bottom: 1px solid #eee;
+                }
+
+                    .nutrition-table td:first-child {
+                        text-align: left;
+                        font-weight: 600;
+                        color: var(--green-dark);
+                        padding-left: 1.5rem;
+                    }
+
+                .nutrition-table tbody tr:hover {
+                    background: #f8fcf6;
+                }
+            .diet-plan {
+                background: var(--card-bg);
+                padding: 2.8rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+                margin-bottom: 2rem;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all .6s ease;
+                display: none;
+            }
+
+                .diet-plan.visible {
+                    opacity: 1;
+                    transform: translateY(0);
+                    display: block;
+                }
+
+                .diet-plan h2 {
+                    font-size: 2.2rem;
+                    color: var(--green-dark);
+                    text-align: center;
+                    margin-bottom: 1.8rem;
+                }
+
+                .diet-plan ol {
+                    counter-reset: meal-counter; /* Custom counter for numbering */
+                    list-style: none; /* Remove default numbers */
+                    font-size: 1.2rem;
+                    line-height: 1.9;
+                    padding-left: 1.5rem; /* Space for custom numbers */
+                }
+
+                    .diet-plan ol li {
+                        counter-increment: meal-counter;
+                        padding: 14px 0 14px 2.5rem; /* Space for number + text */
+                        position: relative;
+                        border-bottom: 1px dashed #ddd;
+                    }
+
+                        .diet-plan ol li:last-child {
+                            border: none;
+                        }
+
+                        .diet-plan ol li::before {
+                            content: counter(meal-counter) ".";
+                            position: absolute;
+                            left: 0;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            color: var(--green-dark);
+                            font-weight: 800;
+                            font-size: 1.3rem;
+                        }
+
+            .premium-locked {
+                text-align: center;
+                padding: 4rem 2rem;
+                background: linear-gradient(135deg,#fff8e1,#f0f8e8);
+                border-radius: var(--border-radius);
+                border: 3px dashed var(--green-light);
+            }
+
+                .premium-locked h2 {
+                    font-size: 2.4rem;
+                    color: var(--green-dark);
+                    margin-bottom: 1rem;
+                }
+
+                .premium-locked p {
+                    font-size: 1.2rem;
+                    color: #555;
+                    margin-bottom: 2rem;
+                    max-width: 600px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+            .premium-btn {
+                padding: 1rem 3rem;
+                background: linear-gradient(45deg,#ffd700,#ffb300);
+                color: #b8860b;
+                border: none;
+                border-radius: 50px;
+                font-size: 1.3rem;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 8px 20px rgba(255,215,0,0.3);
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+                text-decoration: none;
+            }
+
+                .premium-btn::before {
+                    content: "Lock";
+                    font-size: 1.5rem;
+                }
+
+            footer {
+                text-align: center;
+                padding: 2.5rem;
+                background: var(--brown-dark);
+                color: white;
+                border-top: 5px solid var(--green-light);
+                margin-top: 3rem;
+            }
+
+            @media (max-width: 768px) {
+                .hamburger {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                }
+
+                .nav-links {
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 100%;
+                    background: var(--brown-dark);
+                    flex-direction: column;
+                    padding: 1rem 0;
+                }
+
+                    .nav-links.active {
+                        display: flex;
+                    }
+
+                    .nav-links li {
+                        text-align: center;
+                        margin: 0.5rem 0;
+                    }
+
+                .page-header h1 {
+                    font-size: 2.4rem;
+                }
+
+                .custom-select {
+                    width: 100%;
+                }
+
+                .nutrition-table th, .nutrition-table td {
+                    padding: 0.8rem 0.4rem;
+                    font-size: 0.9rem;
+                }
+
+                .diet-plan {
+                    padding: 1.5rem;
+                }
+
+                    .diet-plan ol {
+                        padding-left: 1rem;
+                    }
+
+                        .diet-plan ol li {
+                            padding-left: 2rem;
+                        }
+
+                            .diet-plan ol li::before {
+                                font-size: 1.2rem;
+                            }
+            }
+        </style>
+    </head>
+    <body>
+
+        <nav class="navbar">
+            <a href="#" class="logo-container">
+                <img src="logo.png" alt="yodacal Logo" class="logo">
+                yodacal
+            </a>
+            <ul id="nav-links" class="nav-links">
+                <li><a href="homepage.html" ">Home</a></li>
+                <li><a href="caloriecalculator.html">Calorie Calculator</a></li>
+                <li><a href="dietplan.html">Diet Plan</a></li>
+                <li><a href="successstories.html">Success Stories</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+                <li><a href="aboutuspage.html">About Us</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+
+        <main>
+            <div class="container">
+                <header class="page-header">
+                    <h1>Choose Your Diet Plan</h1>
+                    <p>Select a goal below to get a delicious, Pakistani-style meal plan tailored just for you!</p>
+                </header>
+
+                <!-- Dropdown -->
+                <div class="diet-selector">
+                    <div class="custom-select">
+                        <div class="premium-badge">Premium</div>
+                        <select id="plan-select" class="styled">
+                            <option value="bulking">Bulking – Gain Muscle Fast</option>
+                            <option value="cutting">Cutting – Get Lean & Defined</option>
+                            <option value="weightloss">Weight Loss – Shed Fat Fast</option>
+                            <option value="custom">Custom Plan (Premium)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Nutrition Table -->
+                <div class="nutrition-table-wrapper">
+                    <h2>Quick Nutrition Comparison (per 100g)</h2>
+                    <table class="nutrition-table">
+                        <thead>
+                            <tr>
+                                <th>Food Item</th>
+                                <th>Calories</th>
+                                <th>Protein</th>
+                                <th>Carbs</th>
+                                <th>Fat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Chicken Breast</strong> (grilled)</td><td>165 kcal</td><td>31 g</td><td>0 g</td><td>3.6 g</td></tr>
+                            <tr><td><strong>White Rice</strong> (cooked)</td><td>130 kcal</td><td>2.7 g</td><td>28 g</td><td>0.3 g</td></tr>
+                            <tr><td><strong>Chapati</strong> (whole wheat)</td><td>297 kcal</td><td>11 g</td><td>46 g</td><td>7.5 g</td></tr>
+                            <tr><td><strong>Egg</strong> (whole, boiled)</td><td>155 kcal</td><td>13 g</td><td>1.1 g</td><td>11 g</td></tr>
+                            <tr><td><strong>Almonds</strong> (raw)</td><td>579 kcal</td><td>21 g</td><td>22 g</td><td>50 g</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Diet Plans (Now using ordered lists with custom numbering) -->
+                <div class="diet-plan visible" id="bulking">
+                    <h2>Bulking Plan – Gain Muscle Fast</h2>
+                    <ol>
+                        <li>Breakfast: 4 Eggs + 2 Aloo Paratha + Full Cream Lassi</li>
+                        <li>Snack: Banana + Handful of Almonds & Dates</li>
+                        <li>Lunch: Chicken Karahi + 3 Chapati + White Rice</li>
+                        <li>Snack: Full-Fat Yogurt with Honey & Nuts</li>
+                        <li>Dinner: Mutton/Beef Handi + 4 Chapati + Salad</li>
+                        <li>Before Bed: Milk + Peanut Butter Sandwich</li>
+                    </ol>
+                </div>
+
+                <div class="diet-plan" id="cutting">
+                    <h2>Cutting Plan – Get Lean & Defined</h2>
+                    <ol>
+                        <li>Breakfast: 3 Egg Whites + 1 Yolk Omelette + Oats with Milk</li>
+                        <li>Snack: Apple or Seasonal Fruit</li>
+                        <li>Lunch: Grilled Chicken Tikka + Brown Rice + Cucumber Salad</li>
+                        <li>Snack: Roasted Chana or Makhana</li>
+                        <li>Dinner: Baked Fish or Chicken Breast + Steamed Veggies</li>
+                    </ol>
+                </div>
+
+                <div class="diet-plan" id="weightloss">
+                    <h2>Weight Loss Plan – Shed Fat Fast</h2>
+                    <ol>
+                        <li>Breakfast: 2 Boiled Eggs + 1 Whole Wheat Toast</li>
+                        <li>Snack: Cucumber + Carrot Sticks</li>
+                        <li>Lunch: Moong Dal + 1 Chapati + Big Salad</li>
+                        <li>Snack: Green Tea + 8-10 Almonds</li>
+                        <li>Dinner: Vegetable/Chicken Soup + Grilled Paneer or Fish</li>
+                    </ol>
+                </div>
+
+                <div class="diet-plan" id="custom">
+                    <div class="premium-locked">
+                        <h2>Unlock Custom Diet Plans</h2>
+                        <p>Get a 100% personalized meal plan based on your taste, schedule, and exact calorie needs — only for yodacal Premium members!</p>
+                        <a href="https://instagram.com/yodacal" class="premium-btn">Upgrade to Premium</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2025 yodacal. All rights reserved.</p>
+        </footer>
+
+        <script>
+            document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('nav-links').classList.toggle('active');
+            });
+
+            const select = document.getElementById('plan-select');
+            select.addEventListener('change', function() {
+            document.querySelectorAll('.diet-plan').forEach(plan => plan.classList.remove('visible'));
+            document.getElementById(this.value).classList.add('visible');
+            });
+
+            // Default to Bulking
+            select.value = 'bulking';
+        </script>
+    </body>
+    </html>
